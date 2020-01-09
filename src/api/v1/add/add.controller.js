@@ -13,8 +13,8 @@ const addPersona = (persona) => {
     const fileRead = JSON.parse(fs.readFileSync(file));
 
     const personaList = fileRead;
-    //console.log(personaList.persona);
-    //console.log(typeof personaList.persona);
+    // console.log(personaList.persona);
+    // console.log(typeof personaList.persona);
     let writeFlag = true;
 
     const newPersona = persona;
