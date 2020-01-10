@@ -1,52 +1,41 @@
 const httpStatus = require('http-status');
-const fs = require('fs');
 
-/**
- * add
- * @public
- */
+// Models
+const personaTable = require('@models/').personas;
 
-const file = 'public/json/persona.json';
+const createPersona = (req) => {
+  const { slug, name, arcana, base_level } = req.body;
 
-const addPersona = (persona) => {
-  try {
-    const fileRead = JSON.parse(fs.readFileSync(file));
-
-    const personaList = fileRead;
-    // console.log(personaList.persona);
-    // console.log(typeof personaList.persona);
-    let writeFlag = true;
-
-    const newPersona = persona;
-
-    personaList.persona.forEach((id) => {
-
-      if (id.slug === newPersona.slug) {
-        // throw new Error('Duplicate Persona!');
-        writeFlag = false;
-      }
+  return personaTable.create({
+    slug,
+    name,
+    arcana,
+    base_level
+  })
+    .catch((err) => {
+      throw err;
     });
-
-    if (writeFlag === true) {
-      personaList.persona.push(newPersona);
-    }
-
-    const newFile = JSON.stringify(personaList);
-    fs.writeFileSync(file, newFile, 'utf8');
-
-    const returnMessage = writeFlag ? 'Successfully added new Persona!' : 'Duplicate Persona! Did you mean to update a Persona instead?';
-
-    return returnMessage;
-  } catch (err) {
-    throw err;
-  }
 };
 
 exports.add = async (req, res, next) => {
-  res.status(httpStatus.OK);
-  return res.json({
-    responseCode: httpStatus.OK,
-    responseMessage: 'OK',
-    response: addPersona(req.body)
-  });
+  try {
+    await createPersona(req);
+
+    res.status(httpStatus.OK);
+
+    return res.json({
+      responseCode: httpStatus.OK,
+      responseMessage: 'OK',
+      response: 'New persona successfully added'
+    });
+  } catch (err) {
+    console.log('ERROR: Error is triggered in exports.add');
+    res.status(httpStatus.OK);
+
+    return res.json({
+      responseCode: httpStatus.BAD_REQUEST,
+      responseMessage: err.name,
+      response: err.errors
+    });
+  }
 };

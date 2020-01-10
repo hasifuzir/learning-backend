@@ -17,8 +17,7 @@
       "@models/*": ["src/models/*"],
       "@services/*": ["src/services/*"],
       "@tests/*": ["src/tests/*"],
-      "@utils/*": ["src/utils/*"],
-      "@public/*": ["public"]
+      "@utils/*": ["src/utils/*"]
     }
   }
 }

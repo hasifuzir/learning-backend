@@ -11,7 +11,7 @@ module.exports = {
       slug: Joi.string().alphanum().lowercase().required(),
       name: Joi.string().required(),
       arcana: Joi.string().lowercase().required().valid(arcana),
-      baselevel: Joi.number().integer().min(0).required()
+      base_level: Joi.number().integer().min(0).required()
     },
     response: {
       200: {

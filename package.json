@@ -81,15 +81,15 @@
     "passport-http-bearer": "^1.0.1",
     "passport-jwt": "4.0.0",
     "path-match": "^1.2.4",
+    "pg": "^7.6.0",
+    "pg-hstore": "^2.3.2",
     "pm2": "^2.4.6",
     "response-time": "^2.3.2",
-    "uuid": "^3.1.0",
+    "sequelize": "^4.44.3",
     "universal-cookie-express": "^3.0.7",
+    "uuid": "^3.1.0",
     "winston": "^3.1.0",
-    "winston-cloudwatch": "^2.0.2",
-    "sequelize": "^4.41.0",
-    "pg": "^7.6.0",
-    "pg-hstore": "^2.3.2"
+    "winston-cloudwatch": "^2.0.2"
   },
   "devDependencies": {
     "@types/jest": "^23.3.3",

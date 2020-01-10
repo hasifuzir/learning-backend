@@ -8,7 +8,7 @@ require('dotenv-safe').load({
 
 module.exports = {
   url: process.env.NODE_ENV === 'test' ? process.env.DB_URL_TEST : process.env.DB_URL,
-  dialect: 'postgres',
+  dialect: 'mysql',
   pool: {
     max: 5,
     min: 0,
