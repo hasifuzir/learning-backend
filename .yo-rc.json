@@ -8,8 +8,8 @@
     "author": "Hasif Uzir",
     "src": "src",
     "kind": "service",
-    "last_endpoint": "update",
-    "last_apidesc": "Updates a Persona",
-    "last_method": "put"
+    "last_endpoint": "arcana",
+    "last_apidesc": "Lists all Persona from an Arcana",
+    "last_method": "get"
   }
 }

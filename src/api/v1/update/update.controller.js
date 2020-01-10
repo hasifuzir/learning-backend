@@ -8,35 +8,6 @@ const personaTable = require('@models/').personas;
  * @public
  */
 
-/*
-const updatePersona = (req) => {
-  const { slug } = req.params;
-  const { name, arcana, base_level } = req.body;
-
-  return personaTable
-    .update({
-      name,
-      arcana,
-      base_level
-    }, {
-      where: {
-        slug
-      }
-    })
-    .then((rows) => {
-      if (!rows) {
-        console.log('SOMETHING');
-        console.log(rows);
-        throw new Error('Persona not found');
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-      throw err;
-    });
-};
-*/
-
 const updatePersona = (req) => {
   const { slug } = req.params;
   const { name, arcana, base_level } = req.body;
@@ -68,7 +39,6 @@ const updatePersona = (req) => {
       throw err;
     });
 };
-
 
 exports.update = async (req, res, next) => {
   try {
