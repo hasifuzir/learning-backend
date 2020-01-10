@@ -29,7 +29,6 @@ exports.add = async (req, res, next) => {
       response: 'New persona successfully added'
     });
   } catch (err) {
-    console.log('ERROR: Error is triggered in exports.add');
     res.status(httpStatus.OK);
 
     return res.json({

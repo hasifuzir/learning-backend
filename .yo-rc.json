@@ -8,8 +8,8 @@
     "author": "Hasif Uzir",
     "src": "src",
     "kind": "service",
-    "last_endpoint": "add",
-    "last_apidesc": "Adds a persona",
-    "last_method": "post"
+    "last_endpoint": "update",
+    "last_apidesc": "Updates a Persona",
+    "last_method": "put"
   }
 }
