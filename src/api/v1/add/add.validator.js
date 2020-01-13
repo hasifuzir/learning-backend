@@ -8,7 +8,7 @@ module.exports = {
   type: 'post',
   joiSchema: {
     body: {
-      slug: Joi.string().alphanum().lowercase().required(),
+      slug: Joi.string().lowercase().required(),
       name: Joi.string().required(),
       arcana: Joi.string().lowercase().required().valid(arcana),
       base_level: Joi.number().integer().min(0).required()

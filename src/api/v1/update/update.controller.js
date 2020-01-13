@@ -10,7 +10,8 @@ const personaTable = require('@models/').personas;
 
 const updatePersona = (req) => {
   const { slug } = req.params;
-  const { name, arcana, base_level } = req.body;
+  const { name, arcana } = req.body;
+  const baseLevel = req.body.base_level;
 
   return personaTable
     .findOne({
@@ -24,7 +25,7 @@ const updatePersona = (req) => {
           .update({
             name,
             arcana,
-            base_level
+            base_level: baseLevel
           }, {
             where: {
               slug
