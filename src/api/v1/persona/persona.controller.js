@@ -3,24 +3,12 @@ const httpStatus = require('http-status');
 // Models
 const personaTable = require('@models').personas;
 
-/**
- * arcana
- * @public
- */
-
-const findArcana = async (req) => {
+const findPersona = async () => {
   try {
-    const { arcana } = req.params;
-
-    const results = personaTable
-      .findAll({
-        where: {
-          arcana
-        }
-      });
+    const results = await personaTable.findAll();
 
     if (!results) {
-      throw new Error('No Persona found in Arcana');
+      throw new Error('Persona not found');
     }
 
     return (results) || null;
@@ -29,14 +17,13 @@ const findArcana = async (req) => {
   }
 };
 
-exports.arcana = async (req, res, next) => {
+exports.persona = async (req, res, next) => {
   try {
     res.status(httpStatus.OK);
-
     return res.json({
       responseCode: httpStatus.OK,
       responseMessage: 'OK',
-      response: await findArcana(req)
+      response: await findPersona()
     });
   } catch (err) {
     res.status(httpStatus.BAD_REQUEST);
@@ -44,7 +31,7 @@ exports.arcana = async (req, res, next) => {
     return res.json({
       responseCode: httpStatus.BAD_REQUEST,
       responseMessage: err.name,
-      response: err.errors
+      response: err.message
     });
   }
 };

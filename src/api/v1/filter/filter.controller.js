@@ -4,23 +4,31 @@ const httpStatus = require('http-status');
 const personaTable = require('@models').personas;
 
 /**
- * arcana
+ * filter
  * @public
  */
 
-const findArcana = async (req) => {
+const filterPersona = async (req) => {
   try {
-    const { arcana } = req.params;
+    const { arcana, minBaseLevel } = req.query;
 
-    const results = personaTable
-      .findAll({
-        where: {
-          arcana
-        }
-      });
+    const whereObject = {};
+
+    if (arcana) {
+      whereObject.arcana = arcana;
+    }
+    if (minBaseLevel) {
+      whereObject.base_level = {
+        gte: minBaseLevel
+      };
+    }
+
+    const results = await personaTable.findAll({
+      where: whereObject
+    });
 
     if (!results) {
-      throw new Error('No Persona found in Arcana');
+      throw new Error('No Persona matches found');
     }
 
     return (results) || null;
@@ -29,14 +37,14 @@ const findArcana = async (req) => {
   }
 };
 
-exports.arcana = async (req, res, next) => {
+exports.filter = async (req, res, next) => {
   try {
     res.status(httpStatus.OK);
 
     return res.json({
       responseCode: httpStatus.OK,
       responseMessage: 'OK',
-      response: await findArcana(req)
+      response: await filterPersona(req)
     });
   } catch (err) {
     res.status(httpStatus.BAD_REQUEST);
@@ -44,7 +52,7 @@ exports.arcana = async (req, res, next) => {
     return res.json({
       responseCode: httpStatus.BAD_REQUEST,
       responseMessage: err.name,
-      response: err.errors
+      response: err.message
     });
   }
 };

@@ -1,15 +1,15 @@
 const express = require('express');
 const validate = require('express-validation');
-const controller = require('./list.controller');
-const validator = require('./list.validator');
+const controller = require('./filter.controller');
+const validator = require('./filter.validator');
 
 const router = express.Router();
 
 /**
- * @api {get} api/v1/list list
- * @apiDescription Lists all persona
+ * @api {get} api/v1/filter filter
+ * @apiDescription Filters all Persona based on user queries
  * @apiVersion 1.0.0
- * @apiName list
+ * @apiName filter
  * @apiPermission public
  *
  * @apiParam  {String} [param]  Put some parameter schema here
@@ -21,6 +21,6 @@ const router = express.Router();
  * @apiError (Bad Request 400)  ValidationError  Some parameters may contain invalid values
  */
 router.route('/')
-  .get(validate(validator.joiSchema), controller.list);
+  .get(validate(validator.joiSchema), controller.filter);
 
 module.exports = router;

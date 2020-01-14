@@ -1,11 +1,18 @@
 const Joi = require('joi');
 
+const arcana = ['fool', 'jester', 'magician', 'consultant', 'priestess', 'empress', 'emperor', 'hierophant', 'lovers', 'chariot', 'justice', 'hermit', 'fortune', 'strength', 'hunger', 'hanged-man', 'death', 'death', 'temperance', 'devil', 'tower', 'star', 'moon', 'sun', 'judgement', 'aeon', 'world', 'universe', 'faith'];
+
+
 module.exports = {
-  name: 'list',
-  path: '/api/v1/list',
+  name: 'filter',
+  path: '/api/v1/filter',
   type: 'get',
   joiSchema: {
     body: {},
+    query: {
+      arcana: Joi.string().lowercase().valid(arcana),
+      minBaseLevel: Joi.number().integer().min(0)
+    },
     response: {
       200: {
         description: 'OK',

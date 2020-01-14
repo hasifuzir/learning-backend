@@ -8,44 +8,40 @@ const personaTable = require('@models/').personas;
  * @public
  */
 
-const deletePersona = (req) => {
-  const { slug } = req.params;
+const deletePersona = async (req) => {
+  try {
+    const { slug } = req.params;
 
-  return personaTable
-    .destroy({
-      where: {
-        slug
-      }
-    })
-    .then((rows) => {
-      if (!rows) {
-        throw new Error('Persona not found');
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-      throw err;
+    const data = await personaTable.destroy({
+      where: { slug }
     });
+
+    if (!data) {
+      throw new Error('Persona not found');
+    }
+
+    return (data) ? 'Persona successfully deleted' : null;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
 };
 
 exports.delete = async (req, res, next) => {
   try {
-    // console.log(req.params);
-    await deletePersona(req);
-
     res.status(httpStatus.OK);
 
     return res.json({
       responseCode: httpStatus.OK,
       responseMessage: 'OK',
-      response: 'Persona successfully deleted'
+      response: await deletePersona(req)
     });
   } catch (err) {
-    res.status(httpStatus.OK);
+    res.status(httpStatus.BAD_REQUEST);
 
     return res.json({
       responseCode: httpStatus.BAD_REQUEST,
-      responseMessage: err.message,
+      responseMessage: err.name,
       response: err.message
     });
   }

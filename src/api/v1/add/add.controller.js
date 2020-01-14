@@ -3,33 +3,38 @@ const httpStatus = require('http-status');
 // Models
 const personaTable = require('@models/').personas;
 
-const createPersona = (req) => {
-  const { slug, name, arcana, base_level } = req.body;
+const createPersona = async (req) => {
+  try {
+    const { slug, name, arcana, baseLevel } = req.body;
 
-  return personaTable.create({
-    slug,
-    name,
-    arcana,
-    base_level
-  })
-    .catch((err) => {
-      throw err;
+    const results = await personaTable.create({
+      slug,
+      name,
+      arcana,
+      base_level: baseLevel
     });
+
+    if (!results) {
+      throw new Error('Unable to create new Persona');
+    }
+
+    return (results) ? 'New Persona successfully created' : null;
+  } catch (err) {
+    throw err;
+  }
 };
 
 exports.add = async (req, res, next) => {
   try {
-    await createPersona(req);
-
-    res.status(httpStatus.OK);
+    res.status(httpStatus.CREATED);
 
     return res.json({
       responseCode: httpStatus.OK,
       responseMessage: 'OK',
-      response: 'New persona successfully added'
+      response: await createPersona(req)
     });
   } catch (err) {
-    res.status(httpStatus.OK);
+    res.status(httpStatus.BAD_REQUEST);
 
     return res.json({
       responseCode: httpStatus.BAD_REQUEST,

@@ -8,8 +8,8 @@
     "author": "Hasif Uzir",
     "src": "src",
     "kind": "service",
-    "last_endpoint": "arcana",
-    "last_apidesc": "Lists all Persona from an Arcana",
+    "last_endpoint": "filter",
+    "last_apidesc": "Filters all Persona based on user queries",
     "last_method": "get"
   }
 }
