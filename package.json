@@ -55,7 +55,7 @@
   "dependencies": {
     "async": "^2.6.1",
     "aws-sdk": "^2.253.1",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "axios-retry": "^3.1.1",
     "bcryptjs": "2.4.3",
     "bluebird": "^3.5.0",
